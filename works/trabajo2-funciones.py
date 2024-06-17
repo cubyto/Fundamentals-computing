@@ -80,13 +80,13 @@ print(res)
 
 """Problema 2: encontrar identificadores"""
 # Primera forma -> ITerando sobre la cadena
-
+import re
 from keyword import kwlist
 
 
 def render_list(string) -> list:
     # Lista de operadores y símbolos
-    operadores_simbolos = "~!@#$%^&*()_+-=,./;[]<>?:{}'|)"
+    operadores_simbolos = "~!@#$%^&*()_+-=,./;[]<>?:{}'|"
     new_str = ""
     for char in string:
         if char in operadores_simbolos or char == " ":
@@ -97,14 +97,34 @@ def render_list(string) -> list:
 
 
 def find_new_id(lista: list) -> set:
-    list_new_var = {var for var in lista if var and var not in kwlist}
+    number_list = "1234567890"
+    list_new_var = {
+        var for var in lista if var and var not in kwlist and var[0] not in number_list
+    }
+    print(list_new_var)
     return list_new_var
 
 
-cadena = "if num1>num2: mayor=num1"
-render_str = render_list(cadena)
-res = find_new_id(render_str)
-print(res)
+def find_new_val(string: str) -> list:
+    pattern = r"\b\w+=(\d+(\.\d+)?)\b"
+    values = re.findall(pattern, string)
+    return [float(value[0]) for value in values]
+
+
+def main():
+    cadena = "if num1>num2: mayor=num1 X=12.34 Y=3.14 num1=12 "
+    render_str = render_list(cadena)
+    new_ids = find_new_id(render_str)
+    new_vals = find_new_val(cadena)
+    print("Los identificadores son:")
+    for var in new_ids:
+        print(var)
+    print("Los numeros reales son:")
+    for val in new_vals:
+        print(val)
+
+
+main()
 
 # Segunda forma -> Usando expresiones regulares
 import re
