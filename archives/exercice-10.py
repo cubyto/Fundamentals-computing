@@ -10,7 +10,7 @@ def word_list():
     for line in lines:
         word = ""
         for char in line:
-            if char != " ":
+            if char != " " or char != "\n":
                 word += char
             else:
                 break
@@ -20,10 +20,18 @@ def word_list():
 
 def word_repeat(lista):
     words_repeating = {}
+    for word in lista:
+        if word in words_repeating:
+            words_repeating[word] += 1
+        else:
+            words_repeating[word] = 1
+    countFilter = {k: v for k, v in words_repeating.items() if v > 1}
+    return countFilter
 
 
 def main():
-    num_word = count_word()
+    list_word = word_list()
+    num_word = word_repeat(list_word)
     print(num_word)
 
 

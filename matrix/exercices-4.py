@@ -1,3 +1,8 @@
+"""
+    4. Hallar las sumas parciales de cada fila de una matriz.
+"""
+
+
 def draw_matrix():
     draw_matriz = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     return draw_matriz
