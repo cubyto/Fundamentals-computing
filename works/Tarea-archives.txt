@@ -1,0 +1,95 @@
+# Ejercicio 10
+def wordOcurrence(file, word):
+  archivo = open(file, "r")
+  conteo = 0
+  
+  for linea in archivo:
+    i = 0
+    cad = ""
+    while i < len(linea):
+      if linea[i] != " " and linea[i] != "\n":
+        cad += linea[i]
+        i += 1
+      else:
+        if cad == word:
+          conteo += 1
+        cad = ""
+        i += 1
+    if cad == word:
+      conteo += 1
+
+  archivo.close()
+
+  print(f"La palabra '{word}' aparece {conteo} veces en el archivo.")
+
+# Ejercicio 11
+
+def replaceWord(file, wordToReplace, newWord):
+  archivo = open(file, 'r')
+  lineas = archivo.readlines()
+  archivo.close()
+
+  archivo = open(file, 'w')
+  for linea in lineas:
+    nuevaLinea = ""
+    palabraActual = ""
+    i = 0
+    while i < len(linea):
+      if linea[i] != " " and linea[i] != "\n":
+        palabraActual += linea[i]
+        i += 1
+      else:
+        if palabraActual == wordToReplace:
+          nuevaLinea += newWord
+        else:
+            nuevaLinea += palabraActual
+        nuevaLinea += linea[i] 
+        palabraActual = ""  
+        i += 1
+        
+    if palabraActual == wordToReplace:
+      nuevaLinea += newWord
+        
+    archivo.write(nuevaLinea)
+  archivo.close()
+
+# Ejercicio 14
+
+def reverseContentFile(file):
+  archivo = open(file, "r")
+  contenido = archivo.read()
+  contenido = contenido[::-1]
+  print(contenido)
+  archivo.close()
+
+# Ejercicio 15
+
+def reveseWordsFile(file):
+  archivo = open(file, 'r')
+  lineas = archivo.readlines()
+  archivo.close()
+
+  archivo = open(file, 'w')
+  for linea in lineas:
+    nuevaLinea = ""
+    palabraActual = ""
+    i = 0
+    while i < len(linea):
+      if linea[i] != " " and linea[i] != "\n":
+        palabraActual += linea[i]
+        i += 1
+      else:
+        palabraActual = palabraActual[::-1]
+        nuevaLinea += palabraActual
+        nuevaLinea += linea[i] 
+        palabraActual = ""  
+        i += 1
+        
+    if palabraActual != "":
+      palabraActual = palabraActual[::-1]
+      nuevaLinea += palabraActual
+        
+    archivo.write(nuevaLinea)
+  archivo.close()
+
+
